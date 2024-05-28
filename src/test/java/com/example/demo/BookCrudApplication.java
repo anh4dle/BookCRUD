@@ -17,6 +17,8 @@ public class BookCrudApplication {
 	@Bean
 	public CommandLineRunner demo(BookRepository repo) {
 		return (args) -> {
+			repo.deleteAll();
+
 			Book book1 = new Book("To Huu", "Nang Ha", "Quyen sach dau tien", 123);
 			Book book2 = new Book("To Huu2", "Nang Ha2", "Quyen sach thu 2", 4561);
 			Book book3 = new Book("To Huu3", "Nang Ha3", "Quyen sach thu 3", 789);
@@ -27,12 +29,19 @@ public class BookCrudApplication {
 			repo.findAll().forEach(book -> {
 				System.out.println(book.toString());
 			});
-
 			//Find by isbn
 			System.out.println("Book returned: " + repo.findByisbn(4561).toString());
-
 			//Find by title
-			System.out.println("Book returned: " + repo.findByTitle("To Huu2").toString());
+			System.out.println("Book returned: " + repo.findByTitle("Nang Ha3").toString());
+			//Delete a book
+			repo.delete(book3);
+			//Get all books
+			repo.findAll().forEach(book -> {
+				System.out.println(book.toString());
+			});
+			//Delete all book
+			repo.deleteAll();
+			System.out.print("Book size after delete all: " + repo.findAll().size());
 
 		};
 	}
