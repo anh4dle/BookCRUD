@@ -23,12 +23,17 @@ public class BookCrudApplication {
 			repo.save(book1);
 			repo.save(book2);
 			repo.save(book3);
-
+			//Get all books
 			repo.findAll().forEach(book -> {
 				System.out.println(book.toString());
 			});
-			Book returned = repo.findByisbn(4561);
-			System.out.println("Book returned: " + returned.toString());
+
+			//Find by isbn
+			System.out.println("Book returned: " + repo.findByisbn(4561).toString());
+
+			//Find by title
+			System.out.println("Book returned: " + repo.findByTitle("To Huu2").toString());
+
 		};
 	}
 
